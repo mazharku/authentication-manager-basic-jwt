@@ -1,0 +1,36 @@
+package com.fluid.authentication.configuration;
+
+import com.fluid.authentication.model.entities.Role;
+import com.fluid.authentication.model.enums.RoleType;
+import com.fluid.authentication.repository.RoleRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.PostConstruct;
+import java.util.Arrays;
+import java.util.List;
+
+@Configuration
+@RequiredArgsConstructor
+public class BaseDataConfiguration {
+    private final RoleRepository repository;
+    @Value("${loadBaseData}")
+    private boolean loadBaseData;
+
+    @PostConstruct
+    public void loadConfig() {
+        if (loadBaseData) {
+            loadBaseData();
+        }
+    }
+
+    public void loadBaseData() {
+        List<Role> authorities = Arrays.asList(
+                new Role(1, RoleType.ADMIN),
+                new Role(2, RoleType.MANAGER),
+                new Role(3, RoleType.CASHIER),
+                new Role(4, RoleType.USER));
+        repository.saveAll(authorities);
+    }
+}
