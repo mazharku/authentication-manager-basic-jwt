@@ -1,7 +1,6 @@
 package com.fluid.authentication.jwt;
 
 import com.fluid.authentication.model.entities.User;
-import com.fluid.authentication.repository.RoleRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

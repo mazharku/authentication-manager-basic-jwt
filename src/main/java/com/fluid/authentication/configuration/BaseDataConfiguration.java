@@ -33,4 +33,5 @@ public class BaseDataConfiguration {
                 new Role(4, RoleType.USER));
         repository.saveAll(authorities);
     }
+
 }

@@ -14,4 +14,5 @@ public class HomeController {
     public String printHome() {
         return "mazhar";
     }
+
 }

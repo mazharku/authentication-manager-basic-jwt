@@ -5,5 +5,5 @@ public enum RoleType {
     MANAGER,
     CASHIER,
     USER,
-    NO_ROLE;
+    NO_ROLE
 }
