@@ -30,6 +30,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             if(SecurityContextHolder.getContext().getAuthentication() == null){
                 List<String> authorities = jwtTokenService.extractAuthorities(jwt);
                 List<SimpleGrantedAuthority> simpleGrantedAuthorities = authorities.stream().map(SimpleGrantedAuthority::new).toList();
+
                 if(jwtTokenService.validateToken(jwt)){
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(null, null, simpleGrantedAuthorities);
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

@@ -31,11 +31,16 @@ public class AuthenticationService {
 
     @SneakyThrows
     public String getToken(LoginModel loginModel) {
-        User user = userRepository.findByEmail(loginModel.getEmail())
-                .orElseThrow(() -> new RuntimeException("invalid user!"));
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginModel.getEmail(), loginModel.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        return tokenService.generateToken(user);
+        try {
+            User user = userRepository.findByEmail(loginModel.getEmail())
+                    .orElseThrow(() -> new RuntimeException("invalid email!"));
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginModel.getEmail(), loginModel.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            return tokenService.generateToken(user);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public String createUser(CreateUserDTO userDTO) {

@@ -41,7 +41,6 @@ public class JWTTokenService {
         } catch (Exception e) {
             return false;
         }
-
     }
 
     public String loginUserId(String jwt) {
@@ -66,4 +65,5 @@ public class JWTTokenService {
     private Claims parseClaimsFromJWT(String jwt) {
         return Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(secret)).parseClaimsJws(jwt).getBody();
     }
+
 }

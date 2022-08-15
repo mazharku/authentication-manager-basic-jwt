@@ -15,9 +15,12 @@ import javax.persistence.*;
 @Entity
 @Table(name = "roles")
 public class Role {
+
     @Id
     private int id;
+
     @Column(name = "name", length = 64, nullable = false)
     @Enumerated(EnumType.STRING)
     private RoleType name;
+
 }

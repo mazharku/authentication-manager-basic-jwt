@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 @AllArgsConstructor
-public class CustomUserDetails implements UserDetails {
+public class UserDetailsModel implements UserDetails {
     private final User user;
 
     @Override
