@@ -31,23 +31,18 @@ public class AuthenticationService {
 
     @SneakyThrows
     public String getToken(LoginModel loginModel) {
-        try {
-            User user = userRepository.findByEmail(loginModel.getEmail())
-                    .orElseThrow(() -> new RuntimeException("invalid email!"));
-            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginModel.getEmail(), loginModel.getPassword()));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            return tokenService.generateToken(user);
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-        }
-        return null;
+        User user = userRepository.findByEmail(loginModel.getEmail())
+                .orElseThrow(() -> new RuntimeException("invalid email!"));
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginModel.getEmail(), loginModel.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        return tokenService.generateToken(user);
     }
 
     public String createUser(CreateUserDTO userDTO) {
         String status = "created!";
         try {
             List<RoleType> roleNames = Arrays.stream(userDTO.getAuthorities().split("\\,"))
-                    .map(e-> RoleType.valueOf(e.toUpperCase())).toList();
+                    .map(e -> RoleType.valueOf(e.toUpperCase())).toList();
             List<Role> authorities = roleRepository.findAllByNameIn(roleNames);
             User user = new User();
             user.setName(userDTO.getName());

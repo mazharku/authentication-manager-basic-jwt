@@ -3,11 +3,11 @@ package com.fluid.authentication.configuration;
 import com.fluid.authentication.model.entities.Role;
 import com.fluid.authentication.model.enums.RoleType;
 import com.fluid.authentication.repository.RoleRepository;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.List;
 
