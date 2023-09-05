@@ -63,9 +63,6 @@ public class AuthenticationConfig {
                         "/swagger*/**",
                         "/webjars/**",
                         "/swagger-ui/**",
-                        "/api/create",
-                        "/api/login",
-                        "/actuator/**",
                         "/api/auth/**"
                 );
                 //.requestMatchers(HttpMethod.POST, "/api/users");
