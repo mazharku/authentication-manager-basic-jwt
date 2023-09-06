@@ -20,7 +20,7 @@ public class JWTTokenService {
     private String secret;
 
     public String generateToken(User user) {
-        Date expire = new Date(new Date().getTime() + 10 * 60 * 1000);
+        Date expire = new Date(new Date().getTime() + 60 * 60 * 1000);
         List<String> authorities = user.getAuthorities().stream()
                 .map(e-> e.getName().name()).toList();
         return Jwts.builder()

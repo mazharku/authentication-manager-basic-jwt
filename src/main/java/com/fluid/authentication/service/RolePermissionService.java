@@ -8,9 +8,9 @@ import com.fluid.authentication.model.enums.RoleType;
 import com.fluid.authentication.repository.PermissionRepository;
 import com.fluid.authentication.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -56,5 +56,11 @@ public class RolePermissionService {
         role.removePermission(permission);
         roleRepository.save(role);
         return true;
+    }
+
+    public List<PermissionDTO> getUserPermission(List<String> authorities) {
+       return authorities.stream()
+               .map(this::getPermissionsOfRole)
+               .flatMap(Collection::stream).toList();
     }
 }
