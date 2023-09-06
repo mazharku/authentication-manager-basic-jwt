@@ -7,7 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @AllArgsConstructor
@@ -25,10 +26,31 @@ public class Role {
     @Enumerated(EnumType.STRING)
     private RoleType name;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "role_permission",
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "permission_id"))
-    private List<Permission> permissions;
+    private Set<Permission> permissions;
+
+    public void setPermissions(Set<Permission> permissions) {
+        if(this.permissions==null){
+            this.permissions = new HashSet<>();
+        }
+        this.permissions.addAll(permissions);
+    }
+
+    public void addPermission(Permission permission){
+        if(this.permissions==null){
+            this.permissions = new HashSet<>();
+        }
+        this.permissions.add(permission);
+    }
+
+    public void removePermission(Permission permission){
+        if(this.permissions==null){
+            this.permissions = new HashSet<>();
+        }
+        this.permissions.remove(permission);
+    }
 
 }

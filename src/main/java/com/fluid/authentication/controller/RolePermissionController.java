@@ -1,6 +1,7 @@
 package com.fluid.authentication.controller;
 
 import com.fluid.authentication.annotation.ADMIN;
+import com.fluid.authentication.annotation.AuthorizedAPI;
 import com.fluid.authentication.model.dtos.PermissionDTO;
 import com.fluid.authentication.model.dtos.RolePermissionDTO;
 import com.fluid.authentication.service.RolePermissionService;
@@ -17,6 +18,7 @@ public class RolePermissionController {
     private final RolePermissionService service;
 
     @GetMapping("role-permission/{role}")
+    @AuthorizedAPI
     public ResponseEntity<List<PermissionDTO>> getRolePermission(@PathVariable("role") String roleName){
         List<PermissionDTO> permissions = service.getPermissionsOfRole(roleName);
         return ResponseEntity.ok(permissions);
@@ -24,6 +26,7 @@ public class RolePermissionController {
 
     @PostMapping("role-permission")
     @ADMIN
+    @AuthorizedAPI
     public ResponseEntity<?> addPermissionOnRole(@RequestBody RolePermissionDTO rolePermission) {
         boolean created= service.addPermissionOnRole(rolePermission);
         return ResponseEntity.ok(created?"permission added":"permission not added");
@@ -31,6 +34,7 @@ public class RolePermissionController {
 
     @PostMapping("role-permission/{role}/{permission}")
     @ADMIN
+    @AuthorizedAPI
     public ResponseEntity<?> revokePermissionOnRole(@PathVariable("role")String role, @PathVariable("permission")String permission){
         boolean removed = service.revokePermissionOnRole(role,permission);
         return ResponseEntity.ok(removed?"permission removed":"permission not removed");

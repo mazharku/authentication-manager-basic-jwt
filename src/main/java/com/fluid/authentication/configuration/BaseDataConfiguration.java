@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @Configuration
 @RequiredArgsConstructor
@@ -27,10 +28,10 @@ public class BaseDataConfiguration {
 
     public void loadBaseData() {
         List<Role> authorities = Arrays.asList(
-                new Role(1, RoleType.ADMIN, List.of()),
-                new Role(2, RoleType.MANAGER, List.of()),
-                new Role(3, RoleType.CASHIER, List.of()),
-                new Role(4, RoleType.USER, List.of()));
+                new Role(1, RoleType.ADMIN, Set.of()),
+                new Role(2, RoleType.MANAGER, Set.of()),
+                new Role(3, RoleType.CASHIER, Set.of()),
+                new Role(4, RoleType.USER, Set.of()));
         repository.saveAll(authorities);
     }
 
