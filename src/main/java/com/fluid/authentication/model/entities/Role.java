@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,5 +24,11 @@ public class Role {
     @Column(name = "name", length = 64, nullable = false)
     @Enumerated(EnumType.STRING)
     private RoleType name;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "role_permission",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id"))
+    private List<Permission> permissions;
 
 }

@@ -27,10 +27,10 @@ public class BaseDataConfiguration {
 
     public void loadBaseData() {
         List<Role> authorities = Arrays.asList(
-                new Role(1, RoleType.ADMIN),
-                new Role(2, RoleType.MANAGER),
-                new Role(3, RoleType.CASHIER),
-                new Role(4, RoleType.USER));
+                new Role(1, RoleType.ADMIN, List.of()),
+                new Role(2, RoleType.MANAGER, List.of()),
+                new Role(3, RoleType.CASHIER, List.of()),
+                new Role(4, RoleType.USER, List.of()));
         repository.saveAll(authorities);
     }
 

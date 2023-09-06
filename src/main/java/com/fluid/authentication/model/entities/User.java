@@ -31,7 +31,7 @@ public class User {
     private boolean isActive;
 
     @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "user_role_map",
+    @JoinTable(name = "user_role",
     joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> authorities;
